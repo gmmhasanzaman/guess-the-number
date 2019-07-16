@@ -2,6 +2,7 @@ package com.example.mobileappdevelop.madtest2;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -16,7 +17,8 @@ public class MainActivity extends AppCompatActivity {
     EditText inputEt;
     Button submitBth;
     int count;
-    int correctAns = 0;
+    int correctAns;
+    int number;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,8 +32,9 @@ public class MainActivity extends AppCompatActivity {
         submitBth = findViewById(R.id.submitBtnId);
 
         count = 1;
+        correctAns = 0;
 
-        Random random = new Random();
+        /*Random random = new Random();
         int quesNo = 1;
         int number = random.nextInt(101);
 
@@ -43,21 +46,35 @@ public class MainActivity extends AppCompatActivity {
         randomTV.setText(Integer.toString(number));
         rangeTV.setText(Integer.toString(minRange)+ " - " +Integer.toString(minRange+ 10));
 
-        /*startExam();*/
+        *//*startExam();*/
+
+        startExam();
 
         submitBth.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
-                /*if ()*/
+                if(count > 0 ){
 
-                if(count > 0 && count < 10){
-                    count++;
-                    startExam();
-                }if(count == 10){
-                    Toast.makeText(MainActivity.this, "Correct Answer = "
-                            + correctAns, Toast.LENGTH_SHORT).show();
-
+                    String strInput = inputEt.getText().toString();
+                    if(strInput.isEmpty()){
+                        inputEt.setError("Enter number");
+                    }else {
+                        count++;
+                        int input = Integer.parseInt(strInput);
+                        Log.e("Number = ",String.valueOf(number) +" Input ="+ String.valueOf(input));
+                        //Log.e("Input",String.valueOf(input));
+                        if(number == input){
+                            correctAns++;
+                        }
+                        inputEt.setText("");
+                        startExam();
+                        if(count > 10) {
+                            Toast.makeText(MainActivity.this, "Correct Answer = "
+                                    + correctAns, Toast.LENGTH_SHORT).show();
+                            count = 0;
+                        }
+                    }
                 }
 
 
@@ -75,25 +92,32 @@ public class MainActivity extends AppCompatActivity {
 
         Random random = new Random();
         int quesNo = 1;
-        int number = random.nextInt(101);
+        number = random.nextInt(101);
 
         int minRange = (number/10) * 10;
 
         String stringCount = Integer.toString(count);
+        if (count > 10 ){
+            stringCount = "1";
+        }
 
         questionNoTV.setText("Question Number : "+ stringCount + "/ 10");
         randomTV.setText(Integer.toString(number));
         rangeTV.setText(Integer.toString(minRange)+ " - " +Integer.toString(minRange+ 10));
 
-        String strInput = inputEt.getText().toString();
-        int input = Integer.parseInt(strInput);
-
-        if (input > 0){
+       /* String strInput = inputEt.getText().toString();
+        if(strInput.isEmpty()){
+            inputEt.setError("Enter number");
+        }else {
+            int input = Integer.parseInt(strInput);
+            Log.e("Number",String.valueOf(number));
+            Log.e("Input",String.valueOf(input));
             if(number == input){
                 correctAns++;
             }
+            inputEt.setText("");
+        }*/
 
-        }
 
 
 

@@ -1,3 +1,7 @@
 <resources>
-    <string name="app_name">MadTest2</string>
+    <string name="app_name">GUESS THE NUMBER</string>
+    <string name="current_number_is_between">Current Number is between:</string>
+    <string name="range">Range</string>
+    <string name="zero">0</string>
+    <string name="enter_your_guess">Enter your guess</string>
 </resources>
