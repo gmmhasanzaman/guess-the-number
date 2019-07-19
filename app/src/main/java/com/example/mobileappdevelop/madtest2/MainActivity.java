@@ -1,5 +1,6 @@
 package com.example.mobileappdevelop.madtest2;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -62,17 +63,23 @@ public class MainActivity extends AppCompatActivity {
                     }else {
                         count++;
                         int input = Integer.parseInt(strInput);
-                        Log.e("Number = ",String.valueOf(number) +" Input ="+ String.valueOf(input));
-                        //Log.e("Input",String.valueOf(input));
+
+                        /*Log.e("Number = ",String.valueOf(number) +" Input ="+ String.valueOf(input));*/
+
                         if(number == input){
                             correctAns++;
                         }
                         inputEt.setText("");
                         startExam();
                         if(count > 10) {
-                            Toast.makeText(MainActivity.this, "Correct Answer = "
-                                    + correctAns, Toast.LENGTH_SHORT).show();
-                            count = 0;
+                            Intent intent = new Intent(getApplicationContext(),ResultActivity.class);
+                            intent.putExtra("result",String.valueOf(correctAns));
+                            startActivity(intent);
+                            finish();
+
+                            /*Toast.makeText(MainActivity.this, "Correct Answer = "
+                                    + correctAns, Toast.LENGTH_SHORT).show();*//*
+                            count = 0;*/
                         }
                     }
                 }
